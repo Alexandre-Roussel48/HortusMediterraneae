@@ -1,0 +1,33 @@
+'''
+Fichier de configuration générale de l'application
+'''
+
+import os.path
+
+SECRET_KEY = '123456' //Use uuid for secret key
+UPLOAD_FOLDER = os.path.join('static', 'upload')
+DOWNLOAD_FOLDER = os.path.join('static', 'download')
+ALLOWED_EXTENSIONS = ['pdf', 'jpg', 'png', 'jpeg', 'mp3', 'mp4', 'wma', 'avi', 'wmh', 'M4V', 'ppt', 'pptx']
+
+PAGE_DIR = 'static_pages'
+
+LDAP_PREFIX = 'ldap_prefix\\%s'
+LDAP_HOST = 'ldap_host'
+LDAP_BASE_PATH = 'dc=sample'
+LDAP_USER = 'ldap_user'
+LDAP_PASS = 'ldap_pass'
+
+ADMIN_GROUPS = ['admin', 'Administrateurs']
+
+MAIL_SERVER = 'mail_server'
+MAIL_PORT = 25
+#MAIL_PORT = 587
+MAIL_USERNAME = 'mail_username'
+MAIL_PASSWORD = 'mail_password'
+MAIL_SENDER = 'appname <mail_username>'
+SEND_MAIL = True
+
+db_name = 'db'
+db_username = 'db_user'
+db_password = 'db_password'
+db_host = 'db_host'
