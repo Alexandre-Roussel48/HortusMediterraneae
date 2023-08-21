@@ -1,0 +1,33 @@
+{
+  "name": "frontendstyle_pedabotadomainerayol",
+  "version": "1.0.0",
+  "description": "The frontend style of the project PedaBotaDomaineRayol using Bulma CSS framework and Sass",
+  "main": "sass/pedabotastyle.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css-build": "node-sass --omit-source-map-url sass/pedabotastyle.scss css/pedabotastyle.css",
+    "css-watch": "npm run css-build -- --watch",
+    "start": "npm run css-watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexandre-Roussel48/PedaBotaDomaineRayol.git"
+  },
+  "keywords": [
+    "Pedagogy",
+    "Botanic",
+    "Cartography",
+    "Database",
+    "Knowledge"
+  ],
+  "author": "Alexandre Roussel",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Alexandre-Roussel48/PedaBotaDomaineRayol/issues"
+  },
+  "homepage": "https://github.com/Alexandre-Roussel48/PedaBotaDomaineRayol#readme",
+  "devDependencies": {
+    "bulma": "^0.9.4",
+    "node-sass": "^9.0.0"
+  }
+}

@@ -1,0 +1,306 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Vidaloka&display=swap');
+
+// Update Bulma's global variables
+$family-sans-serif: "Montserrat", sans-serif;
+$family-secondary: "Vidaloka", serif;
+$light: rgba(0,0,0,0);
+$primary: #313131;
+$secondary: #FFF;
+$link: #91871E;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+// Update some of Bulma's component variables
+$control-border-width: 2px;
+$navbar-height: 5rem;
+$navbar-item-img-max-height: 5rem;
+
+
+@import "../node_modules/bulma/bulma.sass";
+
+.background_fixed {
+	position: fixed;
+	z-index: -1;
+}
+
+.header_fixed {
+	position: fixed;
+	left:0;
+	right:0;
+	top:0;
+}
+
+.centered_columns {
+	height: 100%;
+	margin: 0;
+	font-weight: 600;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.header_logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 150px;
+}
+
+.header_logo > img {
+	max-height: 100%;
+}
+
+.header_nav {
+	background-color: rgba(255, 255, 255, 0.25);
+	border-radius: 50px;
+	height: 75px;
+	margin-top: 37.5px;
+	margin-bottom: 37.5px;
+}
+
+.top_120 {
+	padding-top: 120px;
+}
+
+.top_15 {
+	padding-top: 15%;
+}
+
+.top_20 {
+	padding-top: 20%;
+}
+
+.top_50 {
+	padding-top: 50%;
+}
+
+.bottom_20 {
+	padding-bottom: 20%;
+}
+
+.bottom_120 {
+	padding-bottom: 120px;
+}
+
+.jasmine {
+	color: #F8E077;
+}
+
+.home_long_box {
+	background-color: rgba(255, 255, 255, 0.5);
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
+
+.stats_box {
+	background-color: rgb(255, 255, 255);
+	padding-top: 50px;
+	padding-bottom: 50px;
+	margin-right: 10px;
+}
+
+.terms_box {
+	background-color: rgba(255, 255, 255, 0.5);
+	padding-top: 15px;
+	padding-bottom: 50px;
+	margin-left: 20px;
+}
+
+.text_break {
+	overflow-wrap: break-word;
+}
+
+.form_position {
+	padding-top: 1.25rem;
+}
+
+.spaced_buttons > button:last-child {
+	margin-left: auto;
+}
+
+.spaced_buttons > a:last-child {
+	margin-left: auto;
+}
+
+.intro-color {
+	background-color: yellow;
+}
+
+.dvp-color {
+	background-color: green;
+}
+
+.dvpopt-color {
+	background-color: lightgreen;
+}
+
+.conclu-color {
+	background-color: red;
+}
+
+.grey-color {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.text_color {
+	color: #FFFFFF;
+}
+
+.field_text {
+	flex-grow: 0.25;
+}
+
+.columns_position {
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+}
+
+.text_center {
+	text-align: center;
+}
+
+.large_modal {
+	width: 60%;
+}
+
+.large_form {
+	max-width: 80%;
+}
+
+.sticky_head {
+	position: sticky;
+	top: 2px;
+	padding: 16px;
+	background-color: rgba(255, 255, 255, 0.5);
+	text-align: center;
+	width: 100%;
+	z-index: 200;
+}
+
+.autocomplete {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+}
+
+.autocomplete-items {
+	position: absolute;
+	border: 1px solid #313131;
+	border-bottom: none;
+	border-top: none;
+	z-index: 99;
+	top: 100%;
+	left: 0;
+	right: 0;
+}
+
+.autocomplete-items div {
+	padding: 10px;
+	cursor: pointer;
+	background-color: #fff;
+	border-bottom: 1px solid #313131;
+}
+.autocomplete-items div:hover {
+	background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+	background-color: #91871E !important;
+	color: #ffffff;
+}
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	color: black;
+	text-align: center;
+	padding: 2px 0;
+	font-family: sans;
+	border: 1px solid #313131;
+	position: absolute;
+	background-color: #FFF;
+	z-index: 100;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	border-top: medium;
+
+	width: 120px;
+	top: 100%;
+	left: 50%;
+	margin-left: -60px;
+
+	font-size: small;
+}
+
+.tooltip .tooltiptext-right {
+	visibility: hidden;
+	width: 500px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	top: -5px;
+	left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+
+.tooltip:hover .tooltiptext-right {
+	visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+	content: " ";
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent transparent black transparent;
+}
+
+.tooltip .tooltiptext-right::after {
+	content: "";
+	position: absolute;
+	top: 15%;
+	right: 100%;
+	margin-top: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent black transparent transparent;
+}
+
+.embeb_position {
+	width: 100%;
+}
+
+.add_button {
+	transform: rotate(45deg);
+}
+
+.text_break > div {
+	word-break: break-all;
+}
+
+.ghost_button {
+	border: none;
+}
+
+.scrollable_content {
+	overflow: auto;
+	height: 500px;
+}
