@@ -110,3 +110,12 @@ def anim_delete():
      id_anim = request.args['q']
      animation.delete_animation(id_anim)
      return 'deleted'
+
+
+#Cette fonction permet de chercher les specimens par parcelles.
+@views.route('/search', methods=['GET'])
+#@auth.require_valid_user
+def search_animation():
+     query = request.args['q']
+     anims = animation.search_animation(query)
+     return json.dumps([anim.toDict() for anim in anims], cls=json_encoder.DateTimeEncoder)

@@ -31,7 +31,7 @@ views = Blueprint('medias',__name__)
 #@auth.require_valid_user
 def get_tags_search():
      thes = thesaurus.get_all_thes()
-     codes = ['ref.theme','ref.type_media']
+     codes = ['ref.theme','ref.saison','ref.type_media']
 
      return json.dumps(
           {
@@ -127,3 +127,12 @@ def medias_delete():
      os.remove(_media.url)
      media.delete_media(id_media)
      return 'deleted'
+
+
+#Cette fonction permet de chercher les medias par noms.
+@views.route('/search', methods=['GET'])
+#@auth.require_valid_user
+def search_media():
+     query = request.args['q']
+     medias = media.search_media(query)
+     return json.dumps([media.toDict() for media in medias], cls=json_encoder.DateTimeEncoder)

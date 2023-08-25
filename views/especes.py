@@ -66,8 +66,20 @@ def create_or_update_taxonomie():
      vernaculaires = taxon.pop('vernaculaires')
      taxon['date_modif'] = datetime.datetime.now()
 
-     id_taxon = taxonomie.create_or_update_taxonomie(taxon, tags, synonymes, vernaculaires)
+     try:
+          id_taxon = taxonomie.create_or_update_taxonomie(taxon, tags, synonymes, vernaculaires)
+          return '/especes/'+id_taxon
+     except Exception:
+          return 'duplicate'
 
+
+#Cette fonction permet la création ou la mise à jour d'une nomenclature
+@views.route('/cr_or_up_specimen', methods=['POST'])
+#@auth.require_valid_user
+def create_or_update_specimen():
+     _specimen = request.json
+
+     id_taxon = specimen.create_or_update_specimen(_specimen)
      return '/especes/'+id_taxon
 
 
@@ -91,10 +103,78 @@ def especes_search_results():
 #@auth.require_valid_user
 def specimens_search_results():
 
+     parcelles = request.args.getlist('parcelle')
      tags = request.args.getlist('tag')
+     rangs = request.args.getlist('rang')
     
-     match = specimen.match_specimen_tags(tags)
+     match = specimen.match_specimen_tags(parcelles, tags, rangs)
 
      specimens = [(item[0].toDict(), item[1]) for item in match]
 
-     return json.dumps(specimens)
+     return json.dumps(specimens, cls=json_encoder.DateTimeEncoder)
+
+
+#Cette fonction permet de récupérer les données d'un taxon.
+@views.route('/get_taxon', methods=['GET'])
+#@auth.require_valid_user
+def get_taxonomie():
+     id_taxon = request.args['q']
+     taxon = taxonomie.get_taxonomie(id_taxon)
+
+     return json.dumps(taxon.toDict(), cls=json_encoder.DateTimeEncoder)
+
+
+#Cette fonction permet de récupérer les données d'un specimen.
+@views.route('/get_specimen', methods=['GET'])
+#@auth.require_valid_user
+def get_specimen():
+     id_specimen = request.args['q']
+     _specimen = specimen.get_specimen(id_specimen)
+
+     return json.dumps(_specimen.toDict(), cls=json_encoder.DateTimeEncoder)
+
+
+#Cette fonction permet de récupérer les specimens d'un taxon.
+@views.route('/get_specimens', methods=['GET'])
+#@auth.require_valid_user
+def get_specimens():
+     id_taxon = request.args['q']
+     specimens = taxonomie.get_specimens(id_taxon)
+
+     return json.dumps([specimen.toDict() for specimen in specimens], cls=json_encoder.DateTimeEncoder)
+
+
+#Cette fonction permet de chercher les taxons par nom.
+@views.route('/search', methods=['GET'])
+#@auth.require_valid_user
+def search_taxonomie():
+     query = request.args['q']
+     taxons = taxonomie.search_taxonomie(query)
+     return json.dumps([taxon.toDict() for taxon in taxons], cls=json_encoder.DateTimeEncoder)
+
+
+#Cette fonction permet de chercher les specimens par parcelles.
+@views.route('/specimen/search', methods=['GET'])
+#@auth.require_valid_user
+def search_specimen():
+     query = request.args['q']
+     specimens = specimen.search_specimen(query)
+     return json.dumps([specimen.toDict() for specimen in specimens], cls=json_encoder.DateTimeEncoder)
+
+
+#Cette fonction permet de supprimer le taxon passé en parametre.
+@views.route('/delete', methods=['GET'])
+#@auth.require_valid_user
+def delete_taxon():
+     id_taxon = request.args['q']
+     taxonomie.delete_taxonomie(id_taxon)
+     return 'deleted'
+
+
+#Cette fonction permet de supprimer le specimen passé en parametre.
+@views.route('/specimen/delete', methods=['GET'])
+#@auth.require_valid_user
+def delete_specimen():
+     id_specimen = request.args['q']
+     specimen.delete_specimen(id_specimen)
+     return 'deleted'
