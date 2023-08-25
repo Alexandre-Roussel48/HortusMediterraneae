@@ -112,7 +112,7 @@ export default {
 										<span class="tooltiptext">Conte</span>
 									</div>
 								</div>
-								<div class="column is-2">
+								<div class="column is-1">
 									{{media.nom}}
 								</div>
 								<div class="column is-3">
@@ -141,8 +141,6 @@ export default {
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="column is-3">
 									<div class="field has-addons">
 									  <p class="control">
 									  	<a @click="download_media(media)" class="button"><span class="icon">
@@ -159,6 +157,19 @@ export default {
 									  		<font-awesome-icon :icon="['fas', 'trash']" />
 									  	</span></a>
 									  </p>
+									</div>
+								</div>
+								<div class="column is-4">
+									<b>Mots-clés :</b>
+									<div class="columns is-multiline">
+										<div v-for="tag in media.tags" class="column is-6">
+											<span class="icon-text">
+												<span class="icon">
+													<font-awesome-icon :icon="['fas', 'check']" />
+												</span>
+												<span>{{tag.label}}</span>
+											</span>
+										</div>
 									</div>
 								</div>
 								<div class="column is-1" v-if="pertinence[idx]">

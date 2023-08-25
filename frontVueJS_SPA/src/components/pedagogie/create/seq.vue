@@ -91,9 +91,19 @@ export default {
 			}
 
 			if (this.theme_filters.length!=0) {
-				for (let theme in this.theme_filters) {
-					filtered_medias = filtered_medias.filter(e => {return e.tags.id.includes(this.theme_filters[theme])});
-				}
+				filtered_medias = filtered_medias.filter(media => {
+					let count = 0;
+					for (let idx_theme in this.theme_filters) {
+						let theme = this.theme_filters[idx_theme];
+						for (let idx_tag in media.tags) {
+							let tag = media.tags[idx_tag].id;
+							if (theme==tag) {
+								count++;
+							}
+						}
+					}
+					return count==this.theme_filters.length ? true : false;
+				});
 			}
 			
 			if (this.nom_media!='') {

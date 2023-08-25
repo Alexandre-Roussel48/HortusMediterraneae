@@ -108,13 +108,15 @@ export default {
 								</div>
 								<div class="column is-6">
 									<b>Niveaux :</b>
-									<div v-for="tag in anim.tags">
-										<span v-if="tag.reference=='ref.public'" class="icon-text">
-											<span class="icon">
-												<font-awesome-icon :icon="['fas', 'check']" />
+									<div class="columns is-multiline">
+										<div v-for="tag in anim.tags" class="column is-2">
+											<span v-if="tag.reference=='ref.public'" class="icon-text">
+												<span class="icon">
+													<font-awesome-icon :icon="['fas', 'check']" />
+												</span>
+												<span>{{tag.label}}</span>
 											</span>
-											<span>{{tag.label}}</span>
-										</span>
+										</div>
 									</div>
 									<span v-if="is_not_public(anim)" class="icon-text">
 										<span class="icon">
@@ -122,6 +124,19 @@ export default {
 										</span>
 										<span>Tout niveau</span>
 									</span>
+								</div>
+								<div class="column is-12">
+									<b>Mots-clés :</b>
+									<div class="columns is-multiline">
+										<div v-for="tag in anim.tags" class="column is-2">
+											<span v-if="tag.reference!='ref.public'" class="icon-text">
+												<span class="icon">
+													<font-awesome-icon :icon="['fas', 'check']" />
+												</span>
+												<span>{{tag.label}}</span>
+											</span>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

@@ -33,6 +33,26 @@ export default {
 			}
 			parents = `<a href="/especes/${current.parent.id}">` + current.parent.nom + `</a>` + parents;
 			return parents;
+		},
+		cut_description (description) {
+			let new_string = description.substring(0, 48);
+			if (new_string==description) {
+				return description;
+			}
+			return new_string  + '...';
+		},
+		has_tags (taxon) {
+			for (let idx in taxon.tags) {
+				let tag = taxon.tags[idx];
+				if (tag.reference!='ref.floraison') {
+					return true;
+				}
+			}
+			return false;
+		},
+		async delete_taxon (taxon) {
+			await fetch(`${this.$url_prefix}/especes/delete?q=${taxon.id}`);
+			this.$emit('update');
 		}
 	},
 	computed: {
@@ -59,18 +79,47 @@ export default {
 	<div v-if="taxons_ready">
 		<div class="container">
 			<p class="subtitle is-6" v-if="!is_empty">Taxons :</p>
-			<div class="box" v-for="taxon in this.taxons">
+			<p class="subtitle is-6" v-if="!is_empty">{{taxons.length}} résultat(s)</p>
+			<div class="box text_break" v-for="taxon in this.taxons">
 				<div class="columns is-vcentered is-gapless is-multiline">
-					<div class="column is-10">
+					<div class="column is-9">
 						<a :href="'/especes/'+taxon.id"><i>{{taxon.nom}}</i> {{taxon.auteur}}, {{taxon.annee}}</a>
 					</div>
-					<div class="column is-2">
+					<div class="column is-3">
 						<button class="button ghost_button">{{taxon.rang.label}}</button>
+						<div class="field has-addons">
+							<p class="control">
+								<a :href="'/especes/create?q='+taxon.id" class="button"><span class="icon">
+									<font-awesome-icon :icon="['fas', 'pen']" />
+								</span></a>
+							</p>
+							<p class="control">
+								<a @click="delete_taxon(taxon)" class="button"><span class="icon">
+									<font-awesome-icon :icon="['fas', 'trash']" />
+								</span></a>
+							</p>
+						</div>
 					</div>
 					<div class="column is-12">
 						<span v-if="taxon.parent">
 							<small>Classification : </small>
 							<small v-html="get_parents(taxon)"></small>
+						</span>
+					</div>
+					<div class="column is-12">
+						<div v-html="md(this.cut_description(taxon.description))"></div>
+					</div>
+					<div class="column is-12">
+						<small v-if="has_tags(taxon)">Mots-clés :</small>
+						<span>
+							<small v-for="tag in taxon.tags">
+								<span class="icon-text" v-if="tag.reference!='ref.floraison'">
+									<span class="icon">
+										<font-awesome-icon :icon="['fas', 'check']" />
+									</span>
+									<span>{{tag.label}}&nbsp;&nbsp;</span>
+								</span>
+							</small>
 						</span>
 					</div>
 				</div>
