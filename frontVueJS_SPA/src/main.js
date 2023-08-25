@@ -6,11 +6,11 @@ import router from './router'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faMagnifyingGlass, faPlus, faCheck, faTrash, faDownload, faPen, faSpinner, faImage, faCamera, faVideo, faHeadphones, faFile, faBook, faCaretDown, faCaretUp, faMinus} from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faPlus, faCheck, faTrash, faDownload, faPen, faSpinner, faImage, faCamera, faVideo, faHeadphones, faFile, faBook, faCaretDown, faCaretUp, faMinus, faDatabase, faSeedling, faFish, faCaretLeft, faCaretRight} from '@fortawesome/free-solid-svg-icons'
 
 import { marked } from 'marked'
 
-library.add(faMagnifyingGlass, faPlus, faCheck, faTrash, faDownload, faPen, faSpinner, faImage, faCamera, faVideo, faHeadphones, faFile, faBook, faCaretDown, faCaretUp, faMinus)
+library.add(faMagnifyingGlass, faPlus, faCheck, faTrash, faDownload, faPen, faSpinner, faImage, faCamera, faVideo, faHeadphones, faFile, faBook, faCaretDown, faCaretUp, faMinus, faDatabase, faSeedling, faFish, faCaretLeft, faCaretRight)
 
 const markedMixin = {
     methods: {

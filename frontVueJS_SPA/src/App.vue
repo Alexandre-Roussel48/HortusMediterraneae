@@ -15,16 +15,16 @@ import { RouterLink, RouterView } from 'vue-router'
           <div class="columns is-gapless centered_columns">
             <div class="column is-2"></div>
             <div class="column is-2">
-              <RouterLink to="/">Accueil</RouterLink>
+              <RouterLink to="/" class="title is-5 crapeau">Accueil</RouterLink>
             </div>
             <div class="column is-2">
-              <RouterLink to="/especes">Espèces</RouterLink>
+              <RouterLink to="/especes" class="title is-5 crapeau">Espèces</RouterLink>
             </div>
             <div class="column is-2">
-              <RouterLink to="/medias">Médias</RouterLink>
+              <RouterLink to="/medias" class="title is-5 crapeau">Médias</RouterLink>
             </div>
             <div class="column is-2">
-              <RouterLink to="/pedagogie">Pédagogie</RouterLink>
+              <RouterLink to="/pedagogie" class="title is-5 crapeau">Pédagogie</RouterLink>
             </div>
             <div class="column is-2"></div>
           </div>

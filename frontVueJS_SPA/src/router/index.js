@@ -28,6 +28,11 @@ const router = createRouter({
           path: ':id',
           name: 'especes_consult',
           component: () => import('../views/especes/ConsultView.vue')
+        },
+        {
+          path: ':id/create',
+          name: 'specimen_create',
+          component: () => import('../views/especes/specimen/CreateView.vue')
         }
       ]
     },
