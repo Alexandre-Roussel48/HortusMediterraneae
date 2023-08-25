@@ -52,6 +52,7 @@ export default {
               <div v-for="tag in tags[key]" class="column is-2">
                 <label :for="tag['id']">
                   <input v-if="tag['reference']=='ref.theme'" type="checkbox" :value="tag['id']" :name="tag['code']" :id="tag['id']" v-model="query">
+                  <input v-if="tag['reference']=='ref.saison'" type="checkbox" :value="tag['id']" :name="tag['code']" :id="tag['id']" v-model="query">
                   <input v-if="tag['reference']=='ref.type_media'" type="checkbox" :value="tag['id']" :name="tag['code']" :id="tag['id']" v-model="types">
                   {{tag.label}}
                 </label>

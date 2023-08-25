@@ -38,6 +38,10 @@ export default {
 			} else {
 				this.tabs[tab] = 'visibility: hidden; position: absolute;';
 			}
+		},
+		update_on_delete () {
+			this.key_specimen++;
+			this.key_taxon++;
 		}
 	},
 	computed: {
@@ -45,9 +49,11 @@ export default {
 	},
 	watch: {
 		query_taxon: function () {
+			this.key_specimen++;
 			this.key_taxon++;
 		},
 		rangs_taxon: function () {
+			this.key_specimen++;
 			this.key_taxon++;
 		},
 		query_specimen: function () {
@@ -87,9 +93,13 @@ export default {
 							<div class="column is-12" :style="this.tabs['taxon']">
 								<div class="box">
 									<p v-for="rang in this.tags['Rang']">
-										<label :for="rang['id']">
+										<label :for="rang['id']" v-if="rang['code']!='cultivar'">
 											<input type="checkbox" :value="rang['id']" :name="rang['code']" :id="rang['id']" v-model="rangs_taxon">
 											{{rang.label}}
+										</label>
+										<label :for="rang['id']" v-else>
+											<input type="checkbox" :value="rang['id']" :name="rang['code']" :id="rang['id']" v-model="rangs_taxon">
+											&nbsp;&nbsp;&nbsp;&nbsp;{{rang.label}}
 										</label>
 									</p>
 								</div>
@@ -251,8 +261,9 @@ export default {
 					</div>
 					<div class="column is-half scrollable_content">
 						<div class="box">
-							<Taxons :key="key_taxon" :query="query_taxon" :rangs="rangs_taxon"/>
-							<Specimens :key="key_specimen" :query="query_specimen"/>
+							<Taxons :key="key_taxon" :query="query_taxon" :rangs="rangs_taxon" @update="update_on_delete()"/>
+							<div class="block"></div>
+							<Specimens :key="key_specimen" :parcelle="query_specimen" :tags="query_taxon" :rangs="rangs_taxon" @update="update_on_delete()"/>
 						</div>
 					</div>
 				</div>

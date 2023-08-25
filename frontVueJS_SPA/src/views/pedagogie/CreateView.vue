@@ -185,6 +185,12 @@ export default {
     });
     if (this.$route.query.q) {
       this.data = await this.get_anim(this.$route.query.q);
+      for (let idx_seq in this.data.sequences) {
+        let seq = this.data.sequences[idx_seq];
+        for (let idx_media in seq.materiel) {
+          seq.materiel[idx_media] = seq.materiel[idx_media]['id'];
+        }
+      }
     }
     this.data_ready = true;
   }

@@ -14,7 +14,9 @@ export default {
 				auteur: '',
 				annee: '',
 				description: '',
-				rang: '',
+				publication: '',
+				bibliographie: '',
+				rang: {'id':''},
 				parent: {'parent':''},
 				tags: [],
 				synonymes: [],
@@ -26,12 +28,18 @@ export default {
 			parents: [],
 			from: '',
 			to: '',
+			tags: [],
+			alert: '',
 			data_ready: false
 		}
 	},
 	methods: {
 		async get_thes () {
 			let response = await fetch(`${this.$url_prefix}/especes/get_thes`);
+			return await response.json();
+		},
+		async get_taxon (id_taxon) {
+			let response = await fetch(`${this.$url_prefix}/especes/get_taxon?q=${id_taxon}`);
 			return await response.json();
 		},
 		get_parents (parent) {
@@ -44,7 +52,14 @@ export default {
 					'Content-Type':'application/json'
 				},
 				body: JSON.stringify(this.data)
-			}).then(resp => {resp.text().then(data => {this.redirect = data; this.end = true;})});
+			}).then(resp => { resp.text().then(data => {
+				if (data=='duplicate') {
+					this.alert = data;
+				} else {
+					this.redirect = data;
+					this.end = true;
+				}
+			})});
 		},
 		MaxLengthTextarea(valuename, maxlength){
 			if (this.data[valuename].length > maxlength) {
@@ -154,27 +169,74 @@ export default {
 			for (let idx in this.rep['ref.floraison']) {
 				floraisons.push(this.rep['ref.floraison'][idx].id);
 			}
-			this.data.tags = this.data.tags.filter(e => {return !floraisons.includes(e)});
+			this.data.tags = this.data.tags.filter(e => {
+				for (let idx in floraisons) {
+					let idf = floraisons[idx];
+					if (idf==e.id) {
+						return false;
+					}
+				}
+				return true;
+			});
 			if (this.from && this.to) {
 				if (this.from <= this.to) {
 					for (let i = this.from; i <= this.to; i++) {
-						this.data.tags.push(i);
+						this.data.tags.push({'id':i});
 					}
 				} else {
 					let last = floraisons[floraisons.length-1];
 					for (let i = this.from; i <= last; i++) {
-						this.data.tags.push(i);
+						this.data.tags.push({'id':i});
 					}
 					let first = floraisons[0];
 					for (let i = first; i <= this.to; i++) {
-						this.data.tags.push(i);
+						this.data.tags.push({'id':i});
 					}
+				}
+			}
+		},
+		set_floraison () {
+			let floraisons = [];
+			let months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
+			for (let idx in this.data.tags) {
+				let tag = this.data.tags[idx];
+				if (tag.reference=='ref.floraison') {
+					floraisons.push(tag);
+				}
+			}
+			if (floraisons.length!=0) {
+				let first = 0;
+				let second = 0;
+				for (let idx in months) {
+					let month = months[idx];
+					if (floraisons[0].label==month) {
+						first = idx;
+					}
+					if (floraisons[floraisons.length-1].label==month) {
+						second = idx;
+					}
+				}
+				if (second-first+1==floraisons.length) {
+					this.from = floraisons[0].id;
+					this.to = floraisons[floraisons.length-1].id;
+				} else {
+					this.from = floraisons[floraisons.length-1].id;
+					this.to = floraisons[0].id;
+				}
+			}
+		},
+		update_tags () {
+			for (let idx_tag in this.data.tags) {
+				let tag = this.data.tags[idx_tag];
+				if (!tag['id']) {
+					this.data.tags[idx_tag] = {'id':this.data.tags[idx_tag]};
 				}
 			}
 		}
 	},
 	computed: {
 		dvl () {return this.data.description.length},
+		bvl () {return this.data.bibliographie.length},
 		getfilteredparents () {
 			let filtered_parents = this.parents;
 
@@ -185,42 +247,58 @@ export default {
 			return filtered_parents;
 		},
 		israng () {
-			if (this.data.rang) {
+			if (this.data.rang.id) {
 				let current = 0;
 				for (let idx in this.rangs) {
-					if (this.rangs[idx]['id']==this.data.rang) {
+					if (this.rangs[idx]['id']==this.data.rang.id) {
 						current = idx;
 					}
 				}
 				if (this.rangs[current]['code']=='regne') {
 					return false;
 				}
-				let parent = this.data.rang-1;
+				let parent = this.data.rang.id-1;
 				this.get_parents(parent);
 				return true;
 			}
 			return false;
 		},
 		iscomplete () {
-			return this.data.nom && this.data.rang;
+			return this.data.nom && this.data.rang.id && this.data.bibliographie;
 		},
 		issend () {
 			return this.end;
+		},
+		isalert () {
+			return this.alert ? 'is-active' : '';
 		}
 	},
 	watch: {
-		from: function () {
-			this.fill_floraison();
-		},
-		to: function () {
-			this.fill_floraison();
+		tags: function (val) {
+			this.data.tags = [];
+			for (let idx in val) {
+				this.data.tags.push(val[idx]);
+			}
+			this.update_tags();
 		}
 	},
 	async mounted () {
 		this.rep = await this.get_thes();
 		this.rangs = this.rep['ref.rang'];
-		if (document.data) {
-			this.data = document.data;
+		if (this.$route.query.q) {
+			this.data = await this.get_taxon(this.$route.query.q);
+			this.data.parent = {'parent':this.data.parent.nom ? this.data.parent.nom:''};
+			this.set_floraison();
+			for (let idx in this.data.tags) {
+				let tag = this.data.tags[idx];
+				this.data.tags[idx] = {'id':tag.id};
+			}
+			let new_array = [];
+			for (let idx in this.data.tags) {
+				let tag = this.data.tags[idx];
+				new_array.push(tag['id']);
+			}
+			this.tags = new_array;
 		}
 		this.data_ready = true;
 	}
@@ -261,11 +339,28 @@ export default {
 							</div>
 						</div>
 					</div>
+					<div class="columns">
+						<div class="column is-12">
+							<div class="field">
+								<label class="label">Publication</label>
+								<div class="control">
+									<input class="input" type="text" v-model="data.publication">
+								</div>
+							</div>
+						</div>
+					</div>
 					<div class="field">
 						<label class="label">Description</label>
 						<div class="control">
 							<span>Nombre de caractères : {{dvl}}</span>
-							<textarea name="description" class="textarea" v-model="data.description" @keyup="MaxLengthTextarea('description', 400);"></textarea>
+							<textarea name="description" class="textarea" v-model="data.description" @keyup="MaxLengthTextarea('description', 400);" placeholder="Rentrer le texte en moins de 400 caractères."></textarea>
+						</div>
+					</div>
+					<div class="field">
+						<label class="label">Bibliographie*</label>
+						<div class="control">
+							<span>Nombre de caractères : {{bvl}}</span>
+							<textarea name="bibliographie" class="textarea" v-model="data.bibliographie" @keyup="MaxLengthTextarea('bibliographie', 600);" placeholder="Rentrer le texte en moins de 600 caractères."></textarea>
 						</div>
 					</div>
 					<div class="columns">
@@ -274,7 +369,7 @@ export default {
 								<label class="label">Rang*</label>
 								<div class="control">
 									<div class="select">
-										<select name="rang" v-model="data.rang">
+										<select name="rang" v-model="data.rang['id']">
 											<option value="">Choisir ...</option>
 											<option v-for="rang in rangs" :value="rang['id']">{{rang['label']}}</option>
 										</select>
@@ -333,7 +428,7 @@ export default {
 											<div class="field">
 												<div class="control">
 													<div class="select">
-														<select name="from" v-model="from">
+														<select name="from" v-model="from" @change="fill_floraison()">
 															<option value="">Choisir ...</option>
 															<option v-for="floraison in rep['ref.floraison']" :value="floraison['id']">{{floraison['label']}}</option>
 														</select>
@@ -352,7 +447,7 @@ export default {
 											<div class="field">
 												<div class="control">
 													<div class="select">
-														<select name="to" v-model="to">
+														<select name="to" v-model="to" @change="fill_floraison()">
 															<option value="">Choisir ...</option>
 															<option v-for="floraison in rep['ref.floraison']" :value="floraison['id']">{{floraison['label']}}</option>
 														</select>
@@ -368,7 +463,7 @@ export default {
 							<p class="subtitle is-6">Couleur des fleurs</p>
 							<p v-for="couleur in this.rep['ref.couleur_fleur']">
 								<label :for="couleur['id']">
-									<input type="checkbox" :value="couleur['id']" :name="couleur['code']" :id="couleur['id']" v-model="data.tags">
+									<input type="checkbox" :value="couleur['id']" :name="couleur['code']" :id="couleur['id']" v-model="tags">
 									{{couleur.label}}
 								</label>
 							</p>
@@ -377,17 +472,8 @@ export default {
 							<p class="subtitle is-6">Type biologique</p>
 							<p v-for="type in this.rep['ref.type_bio']">
 								<label :for="type['id']">
-									<input type="checkbox" :value="type['id']" :name="type['code']" :id="type['id']" v-model="data.tags">
+									<input type="checkbox" :value="type['id']" :name="type['code']" :id="type['id']" v-model="tags">
 									{{type.label}}
-								</label>
-							</p>
-						</div>
-						<div class="column">
-							<p class="subtitle is-6">Indigénat</p>
-							<p v-for="indigenat in this.rep['ref.indigenat']">
-								<label :for="indigenat['id']">
-									<input type="checkbox" :value="indigenat['id']" :name="indigenat['code']" :id="indigenat['id']" v-model="data.tags">
-									{{indigenat.label}}
 								</label>
 							</p>
 						</div>
@@ -395,7 +481,7 @@ export default {
 							<p class="subtitle is-6">Conservation / patrimonialité</p>
 							<p v-for="conservation in this.rep['ref.conservation']">
 								<label :for="conservation['id']">
-									<input type="checkbox" :value="conservation['id']" :name="conservation['code']" :id="conservation['id']" v-model="data.tags">
+									<input type="checkbox" :value="conservation['id']" :name="conservation['code']" :id="conservation['id']" v-model="tags">
 									{{conservation.label}}
 								</label>
 							</p>
@@ -404,7 +490,7 @@ export default {
 							<p class="subtitle is-6">Status IUCN à l'échelle mondiale</p>
 							<p v-for="monde in this.rep['ref.iucn_monde']">
 								<label :for="monde['id']">
-									<input type="checkbox" :value="monde['id']" :name="monde['code']" :id="monde['id']" v-model="data.tags">
+									<input type="checkbox" :value="monde['id']" :name="monde['code']" :id="monde['id']" v-model="tags">
 									{{monde.label}}
 								</label>
 							</p>
@@ -413,7 +499,7 @@ export default {
 							<p class="subtitle is-6">Status IUCN à l'échelle européenne</p>
 							<p v-for="europe in this.rep['ref.iucn_europe']">
 								<label :for="europe['id']">
-									<input type="checkbox" :value="europe['id']" :name="europe['code']" :id="europe['id']" v-model="data.tags">
+									<input type="checkbox" :value="europe['id']" :name="europe['code']" :id="europe['id']" v-model="tags">
 									{{europe.label}}
 								</label>
 							</p>
@@ -422,12 +508,24 @@ export default {
 							<p class="subtitle is-6">Status IUCN à l'échelle régionale PACA</p>
 							<p v-for="region in this.rep['ref.iucn_region']">
 								<label :for="region['id']">
-									<input type="checkbox" :value="region['id']" :name="region['code']" :id="region['id']" v-model="data.tags">
+									<input type="checkbox" :value="region['id']" :name="region['code']" :id="region['id']" v-model="tags">
 									{{region.label}}
 								</label>
 							</p>
 						</div>
 					</div>
+				</div>
+				<div class="modal" :class="isalert">
+				  <div class="modal-background"></div>
+				  <div class="modal-content">
+				    <div class="box">
+				    	<div v-if="alert=='duplicate'">
+				    		<p class="subtitle text_center" >Taxon déjà existant</p>
+				    		<p>Le taxon que vous avez essayé d'insérer existe déja !</p>
+				    	</div>
+				    	<button id="modal_button" class="button is-primary" @click="alert=''">Accepter</button>
+				    </div>
+				  </div>
 				</div>
 				<div class="form_position">
 					<div class="buttons spaced_buttons">

@@ -66,8 +66,7 @@ export default {
 		},
 		update_tags () {
       for (let idx_tag in this.data.tags) {
-      	let tag = this.data.tags[idx_tag];
-      	tag = {'id':tag};
+      	this.data.tags[idx_tag] = {'id':this.data.tags[idx_tag]};
       }
     },
     async get_media (id_media) {
@@ -80,9 +79,9 @@ export default {
 		dvl () {return this.data.description.length},
 		iscomplete () {
 			if (this.data.id) {
-				return this.data.type_media.id && this.data.nom && this.data.description;
+				return this.data.type_media.id && this.data.nom && this.data.description && this.data.tags.length!=0;
 			} else {
-				return this.data.type_media.id && this.data.nom && this.data.description && this.file;
+				return this.data.type_media.id && this.data.nom && this.data.description && this.data.tags.length!=0 && this.file;
 			}
 		},
 		issend () {
@@ -138,15 +137,22 @@ export default {
 							</div>
 						</div>
 						<div class="form_position">
-							<p class="subtitle is-6">Mots-clés*</p>
+							<label class="label">Mots-clés*</label>
 							<div class="columns is-gapless is-multiline">
 								<div class="column is-2" v-for="theme in rep['ref.theme']">
-									<label class="checkbox" for="{{theme.id}}">
-										<input type="checkbox" value="{{theme.id}}" name="thematique" id="{{theme.id}}" v-model="tags">
+									<label class="checkbox" :for="theme.id">
+										<input type="checkbox" :value="theme.id" name="theme" :id="theme.id" v-model="tags">
 										{{theme.label}}
 									</label>
 								</div>
+								<div class="column is-2" v-for="saison in rep['ref.saison']">
+									<label class="checkbox" :for="saison.id">
+										<input type="checkbox" :value="saison.id" name="saison" :id="saison.id" v-model="tags">
+										{{saison.label}}
+									</label>
+								</div>
 							</div>
+							<div class="block"></div>
 						</div>
 						<div class="field">
 							<label class="label">Nom du media*</label>

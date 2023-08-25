@@ -81,21 +81,25 @@ export default {
             <h2 class="title text_color">{{data.titre}}</h2>
             <p v-if="data.date_modif" class="text_color"><small>Dernière modification le {{data.date_modif}}</small></p>
             <p><small>
-              <b class="text_color">Niveaux :</b>
-              <div v-for="tag in data.tags">
-                <span v-if="tag.reference=='ref.public'" class="icon-text">
-                  <span class="icon">
-                    <font-awesome-icon :icon="['fas', 'check']" style="color: white;"/>
+              <b class="text_color">Mots-clés :</b>
+              <div class="columns is-multiline">
+                <div v-for="tag in data.tags" class="column is-2">
+                  <span class="icon-text">
+                    <span class="icon">
+                      <font-awesome-icon :icon="['fas', 'check']" style="color: white;"/>
+                    </span>
+                    <span class="text_color">{{tag.label}}</span>
                   </span>
-                  <span class="text_color">{{tag.label}}</span>
-                </span>
+                </div>
+                <div v-if="is_not_public" class="column is-2">
+                  <span v-if="is_not_public" class="icon-text">
+                    <span class="icon">
+                      <font-awesome-icon :icon="['fas', 'check']" />
+                    </span>
+                    <span class="text_color">Tout niveau</span>
+                  </span>
+                </div>
               </div>
-              <span v-if="is_not_public" class="icon-text">
-                <span class="icon">
-                  <font-awesome-icon :icon="['fas', 'check']" />
-                </span>
-                <span class="text_color">Tout niveau</span>
-              </span>
             </small></p>
           </div>
           <div class="column is-4">
@@ -198,22 +202,22 @@ export default {
             <div v-if="sequence.materiel.length">
               <b>Aperçu médias :</b>
               <div class="columns is-multiline text_break">
-                <div v-for="media in sequence.materiel" class="column is-1">
+                <div v-for="media in sequence.materiel" class="column is-2">
                   <button class="button" @click="media.open='is-active'">{{media.nom}}</button>
                   <div class="modal" :class="media.open">
                     <div class="modal-background"></div>
                     <div class="modal-content large_modal">
                       <div class="box">
                         <h1 class="subtitle">{{media.nom}}</h1>
-                        <video v-if="media.type_media==global_values['video']" controls class="embeb_position" >
-                          <source :src="'/'+media.url">
+                        <video v-if="media.type_media.code=='video'" controls class="embeb_position" >
+                          <source :src="`${this.$url_prefix}/`+media.url">
                           Votre navigateur ne supporte pas cette extension.
                         </video>
-                        <audio v-else-if="media.type_media==global_values['bandeson']" controls class="embeb_position">
-                          <source :src="'/'+media.url">
+                        <audio v-else-if="media.type_media.code=='bandeson'" controls class="embeb_position">
+                          <source :src="`${this.$url_prefix}/`+media.url">
                           Votre navigateur ne supporte pas cette extension.
                         </audio>
-                        <embed v-else :src="'/'+media.url" class="embeb_position">
+                        <embed v-else :src="`${this.$url_prefix}/`+media.url" class="embeb_position">
                         <div class="buttons spaced_buttons">
                           <i></i>
                           <button class="button" @click="media.open=''">Fermer</button>
