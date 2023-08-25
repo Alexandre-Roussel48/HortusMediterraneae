@@ -146,3 +146,30 @@ def delete_animation(id_anim):
         Sequence.delete().where(Sequence.id==seq.id).execute()
     #Suppression de l'animation
     Animation.delete().where(Animation.id==id_anim).execute()
+
+
+def get_stats():
+    '''
+    Renvoie le nombre d'objets Animation dans la base de donnees
+
+        Return(s):
+                | count (int): Compte du nombre de Animation
+    '''
+    return len(Animation.select()[:])
+
+
+def search_animation(query):
+    '''
+    Renvoie les objets Animation qui correspondent a query.
+
+        Param(s):
+                | query (str): Nom d'animation a rechercher
+
+        Return(s):
+                | anims (Animation[]): Liste d'Animations correspondant a query
+    '''
+    query_nom = Animation.select().where(Animation.titre.contains(query))
+    query_lieu = Animation.select().where(Animation.lieu.contains(query))
+    query_objectifs = Animation.select().where(Animation.objectifs.contains(query))
+    final_query = list(dict.fromkeys(query_nom+query_lieu+query_objectifs))
+    return final_query

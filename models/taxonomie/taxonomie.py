@@ -23,10 +23,12 @@ class Taxonomie(BaseModel):
                 | vernaculaires (Vernaculaire[]): noms vernaculaires de la taxonomie
     '''
     id = CharField(max_length=40, primary_key=True)
-    nom = CharField(max_length=20)
+    nom = CharField(max_length=40)
     auteur = TextField()
     annee = TextField()
     description = TextField()
+    publication = TextField()
+    bibliographie = TextField()
     rang = ForeignKeyField(Thesaurus)
     tags = ManyToManyField(Thesaurus, backref='taxonomies')
     synonymes = ManyToManyField(Synonyme, backref='taxonomie')
@@ -56,6 +58,8 @@ class Taxonomie(BaseModel):
             'auteur':self.auteur,
             'annee':self.annee,
             'description':self.description,
+            'publication':self.publication,
+            'bibliographie':self.bibliographie,
             'rang':self.rang.toDict(),
             'tags':[tag.toDict() for tag in self.tags],
             'synonymes':[synonyme.toDict() for synonyme in self.synonymes],

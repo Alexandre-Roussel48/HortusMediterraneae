@@ -46,7 +46,7 @@ def match_media_tags(types, tags):
 
     if tags:
         tags_medias = [media for list in [Thesaurus.get(id=tag).medias[:] for tag in tags] for media in list]
-        queryTags = [media for media in tags_medias if value in set(queryTypes)]
+        queryTags = [media for media in tags_medias if media in set(queryTypes)]
         query = [{'media':item[0], 'count':item[1]} for item in Counter(queryTags).most_common()]
     else:
         query = [{'media': item.id} for item in queryTypes]
@@ -87,7 +87,7 @@ def create_or_update_media(data, tags):
 
         media.tags.clear()
         for tag in tags:
-            media.tags.add(tag)
+            media.tags.add(tag['id'])
 
     return media.id
 
@@ -117,3 +117,29 @@ def delete_media(id_media):
     media.tags.clear()
     media.sequences.clear()
     Media.delete().where(Media.id==id_media).execute()
+
+
+def get_stats():
+    '''
+    Renvoie le nombre d'objets Media dans la base de donnees
+
+        Return(s):
+                | count (int): Compte du nombre de Media
+    '''
+    return len(Media.select()[:])
+
+
+def search_media(query):
+    '''
+    Renvoie les objets Media qui correspondent a query.
+
+        Param(s):
+                | query (str): Nom de media a rechercher
+
+        Return(s):
+                | medias (Media[]): Liste de Medias correspondant a query
+    '''
+    query_nom = Media.select().where(Media.nom.contains(query))
+    query_description = Media.select().where(Media.description.contains(query))
+    final_query = list(dict.fromkeys(query_nom+query_description))
+    return final_query

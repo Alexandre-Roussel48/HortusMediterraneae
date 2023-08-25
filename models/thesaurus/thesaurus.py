@@ -15,7 +15,7 @@ class Thesaurus(BaseModel):
     '''
     id = AutoField(primary_key=True)
     reference = TextField()
-    label = CharField(max_length=80)
+    label = CharField(max_length=100)
     code = CharField(max_length=20, null=True)
 
     class Meta:

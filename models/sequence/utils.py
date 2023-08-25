@@ -14,31 +14,34 @@ def create_or_update_all_sequences(id_anim, sequences):
                 | id_anim (str): Id de l'objet Animation auquel les séquences seront liées
                 | sequences ([]): Liste contenant les données des séquences à créer ou mettre à jour
     '''
+    animation = Animation.get(id=id_anim)
+    for seq in animation.sequences:
+        seq.medias.clear()
+        animation.sequences.remove(seq)
+        Sequence.delete().where(Sequence.id==seq.id).execute()
+
     for seq in sequences:
-        if not seq.get('id',False):
-            sequence = Sequence.create(
-                titre = seq['titre'],
-                description = seq['description'],
-                type_seq = Thesaurus.get(id=seq['type_seq']['id']),
-                duree = Thesaurus.get(id=seq['duree']['id']),
-                approche = Thesaurus.get(id=seq['approche']['id']),
-                modalite = Thesaurus.get(id=seq['modalite']['id']),
-                objectifs = seq['objectifs'],
-                materiel_div = seq['materiel_div'])
+        sequence = Sequence.create(
+            titre = seq['titre'],
+            description = seq['description'],
+            type_seq = Thesaurus.get(id=seq['type_seq']['id']),
+            duree = Thesaurus.get(id=seq['duree']['id']),
+            approche = Thesaurus.get(id=seq['approche']['id']),
+            modalite = Thesaurus.get(id=seq['modalite']['id']),
+            objectifs = seq['objectifs'],
+            materiel_div = seq['materiel_div'])
 
-            Animation.get(id=id_anim).sequences.add(sequence)
-        else:
-            sequence = Sequence.get(id=seq['id'])
-            sequence.titre = seq['titre']
-            sequence.description = seq['description']
-            sequence.type_seq = Thesaurus.get(id=seq['type_seq']['id'])
-            sequence.duree = Thesaurus.get(id=seq['duree']['id'])
-            sequence.approche = Thesaurus.get(id=seq['approche']['id'])
-            sequence.modalite = Thesaurus.get(id=seq['modalite']['id'])
-            sequence.objectifs = seq['objectifs']
-            sequence.materiel_div = seq['materiel_div']
-            sequence.save()
+        animation.sequences.add(sequence)
 
-        sequence.medias.clear()
         for media in seq['materiel']:
             sequence.medias.add(Media.get(id=media))
+
+
+def get_stats():
+    '''
+    Renvoie le nombre d'objets Sequence dans la base de donnees
+
+        Return(s):
+                | count (int): Compte du nombre de Sequence
+    '''
+    return len(Sequence.select()[:])

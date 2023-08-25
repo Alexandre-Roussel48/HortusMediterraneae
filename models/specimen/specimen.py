@@ -18,8 +18,10 @@ class Specimen(BaseModel):
     '''
     id = AutoField(primary_key=True)
     parcelle = ForeignKeyField(Thesaurus)
-    taxonomie = ForeignKeyField(Taxonomie)
+    indigenat = ForeignKeyField(Thesaurus)
+    taxonomie = ForeignKeyField(Taxonomie, backref='specimens')
     historique = TextField()
+    herbier = TextField()
     medias = ManyToManyField(Media, backref='specimens')
 
     def toDict(self):
@@ -32,8 +34,10 @@ class Specimen(BaseModel):
         data = {
             'id':self.id,
             'parcelle':self.parcelle.toDict(),
+            'indigenat':self.indigenat.toDict(),
             'taxonomie':self.taxonomie.toDict(),
             'historique':self.historique,
+            'herbier':self.herbier,
             'medias':[media.toDict() for media in self.medias]
         }
 
