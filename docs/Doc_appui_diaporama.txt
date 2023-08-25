@@ -1,0 +1,146 @@
+Diapo 1 : Page d’acceuil 1
+
+1 Les logos sont cliquables et renvoient vers les sites sources
+2 « Espèces » amène vers une liste cf. diapo 4. 
+//+ tard 3 « Jardin » amène vers une liste des jardins où il y aura en + une carte cliquable elle aussi par parcelle, cf. Adèle. 
+4 « Pédagogie » amène vers la base de données pédagogique. Une phrase généraliste expliquera le fonctionnement, les différentes activités,  etc. , chiffres clés.
+5 « Hortus mediterraneae » cliquable amène vers une page introductive ou sera inscrit aussi un « nous contacter ». Il y aura des généralités, etc. Notamment le lien avec le Conservatoire. 
+//+ tard 6 « Champs recherche » doit amener vers toutes les pages de la base. 
+//non 7 Le bandeau du bas sera relatif à l’image qui elle-même doit être changeable quand on veut. Cliquable vers la Fiche espèce. 
+
+Attention :  le but est aussi qu’il n’y ai jamais une plante ou un donnée qu’il n’y aurait pas dans le champs recherche. C’est un lien vers tout le contenu du site. Si le mot clé recherché n’existe pas mettre le message suivant : « Le mot ou nom recherché n’a pas encore fait l’objet de recherche ». 
+Penser à l’écriture intuitive. Ce champs sera sur chaque page en plus petit. 
+
+Diapo 2 : Page d’acceuil 2. C’est la page qui arrive lorsque l’ont déroule la page 1. 
+
+La page précédente ne doit pas descendre jusqu'en bas pour donner envie d’aller voir ici. Voici le contenu de la deuxième page : 
+Le fond d’écran doit-il être le même qu’au dessus (page précédente), est-ce une composante graphique obligatoire ? Cf. Adèle ? 
+Ici figureront des chiffres par « items » (logos) :
+
+Quelques chiffres en bas qui s’actualisent ne fonction des données que l’on rentre, les logos doivent être un renvoi des couleurs selon l’image du fond pour faire matcher l’information selon l’infographie utilisée. 
+Jardins méditerranéen 
+Jardins invités 
+Nombre d’espèces au Domaine du Rayol
+Nombre d’activités pédagogique proposés au Domaine du Rayol
+
+Bandeau avec source, penser au fait que ce truc soit tout le temps présent.
+Logos supplémentaires en bas. vu à l'instant 14h23 le 17.08.23
+
+Remarques : 
+Les logos doivent renvoyer à la couleur des climats med. Attention à la charte colorimétrique. Le jaune me parait bien ? redis-moi si tu a besoin des RVB.
+
+Diapo 3 
+Ici je propose une autre photo car nous sommes dans un autre environnement informatique : espèce. 
+Le but de cette page est de pouvoir retrouver en fonction de sélection, de filtres. Exemple espèce de fleur rouge dans la parcelle d’Afrique du Sud. 
+
+1 Bandeau en haut : idem que sur la page d’acceuil (diapo 1 et 2) mais on doit voit où on est via une couleur différente du reste. 
+2 Taxon : 
+    2.1 Tous les rangs taxonomiques : données déjà envoyé par mail. 
+    2.2  Données de la base où toutes les espèces (une fois sélectionnées) doivent être visibles. Les données visibles ici sur l’onglet sont les suivantes : Genre + espèce + auteur + date (cette donnée doit être cliquable et renvoyée à la fiche espèce, cf. diapo 6. Si il y a une couleur c’est mieux. Rajouter en en dessous de cette information : Emplacement : Afrique du Sud. Si ici comme sur l’exemple on peut voir le nombre d’espèces c’est niquel + en dessous : Indigénat : Exotique. 
+3 Biologie : cf. Diapo suivante pour visualiser la chose mais tout doit tenir sur une page. Les fenêtres ouvertes « agrandissent » alors la page comme sur l’acceuil. 
+
+Loupe en haut à droite : champs recherche comme dab. 
+
+Page « Espèces » liée avec la page d’acceuil. Le but ici est de retrouver en fonction de la sélection. Y voir une sorte de filtre géant ou toutes les infos de la base sont retrouvables. 
+Les flèches bleues renvoient à un menu déroulant à droite lié à la sélection. 
+
+Taxon : espèce en premier cliquable avec auteur + date comme sur l’exemple, tout à droite le nombre d’espèce rentrées ds la BD. Doit apparaitre ici les données suivantes : au dessus hiérarchiquement de la case séléctionnée. En dessous mettre : Herbarium avec une coche ou non si une part d’herbier existe. Ce « Herbarium doit être cliquable et amener vers la table « Herbarium ». La parcelle doit aussi être visible en dessous + photo de la table espèce. 
+Biologie : Floraison par mois, couleurs des fleurs (cf. word), type biologique (cf. word)
+Parcelles : cf. word classique. 
+Indigénat : cf. word. 
+Conservation / Patrimonialité : cf. word
+
+Diapo 4 : Biologie
+Les champs du dessus non visible doivent pouvoir l’être en scrollant vers le bas. 
+
+En ouvrant « Biologie » on arrive à cette table une fois qu’on coche : 
+
+Floraison : menu déroulant avec les mois de l’année sélectionnable. Ca serait sympa que ça soit visible sous forme de « phrase comme dans l’exemple. (si tu arrives).
+            1 Type biologique : Idem menu déroulant avec les principales données directement visibles si elles ont été sélectionnées. Cf. word.
+            2 Couleur des fleurs. Cf. word. 
+
+Je n’ai pas « déployer » les autres tables « types biol », couleurs des fleurs mais c’est le même principe. 
+
+Diapo 5 : Idem
+Données dans les encdarées sur word.
+
+Diapo 6 : idem
+
+Diapo 7 : Fiche espèce
+
+Diapo 8 : Fiche espèce : 
+Les informations contenues dans le « bandeau » orange sont dans une et même grande page comme sur le site POWO kew botanical garden.
+Description : 
+
+Bandeau en haut : filiation du taxon. 
+Coche pour l’Herbarium mediterranea (l'herbier) ; Herbarium mediterraneae: Cliquable vers une zone dédiée, cf. word. Si il existe une part d’herbier la petite coche doit apparaitre si non rien. 
+Champs recherche comme d’habitude. 
+Genre + espèce + auteur + année de publication : genre + espèce taille de police grande comme sur l'exemple) et (nom d'auteur + date de publi plus petit)/ La couleur doit être la même que la charte graphique ? 
+Famille : (champs texte). Doit être cliquable vers IPNI ou Tropicos je dois encore voir. 
+espèce publiée dans selon Tropicos (en petit plus petit si possible). Champs texte copié collé de la source. Doit être cliquable avec un lien. 
+Synonyme courant : champs texte. Pas cliquable.
+Noms vernaculaires : champs texte classique. Pas cliquable. 
+Photo jolie représentative de l’espèce 
+Description : champs texte max 3 lignes relatives à la taille de l’encadré, lui-même imaginé pour faire rentrer l’ensembles des infos demandées. 
+
+Ici bandeau type avec les champs principaux : Exemple sur le site POWO si tu cherches une espèce. Ici j’ai mis le résultats visuel final mais évidement les informations visibles sont issues d’un formulaire comme sur les diapos précédentes.
+
+Conservation : menu déroulant sur le statut des plantes. Cf. Word pour les données. Le but est de voir ce qui a été sélectionné, c’est top comme sur l’exemple pour la personne qui consulte. Les résultats doivent être visuellement différents que le champs type : ici pour l’exemple « IUCN ». 
+Biologie : Les principales données issues des ci-dessous sont visibles comme pour conservation 9.1. 
+            1. Floraison : menu déroulant avec les mois de l’année sélectionnable. Ca serait sympa que ça soit visible sous forme de  comme dans l’exemple. (si c’est pas trop chiant bien sur). Ex « de » mars « à » avril. 
+            2. Type biologique : Idem menu déroulant avec les principales données directement visibles si elles ont été sélectionnées. Cf. word.
+            3. Couleur des fleurs. Idem, Cf. word. 
+Nombre de spécimens liés à l’espèce Attention ce champs doit être cliquable et amène dans une autre table. Cf. diapo suivante dont les chiffres sont issus. 
+     1. Nombre de spécimens vivant : 8
+     2. Nombre de spécimens disparus : 2Carte extraite de GBIF cliquable impérativement car c’est la source biogéographique.
+Parcelles : cf. word
+Culture : a revoir. Ce sera à terme un formulaire à part. 
+Parcelle : Idem que pour Nombre de spécimen. On doit pouvoir voir suite à la sélection de(s) parcelle(s) les informations sélectionnées. 
+Bibliographie : comme sur POWO dans l’onglet « Publication » cf. https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:494400-1#publications Cf. Word
+Indigénat en France : cf. word. 
+
+Diaporama 2
+Je t'ai remis la fiche espèce (diapo 1 ici) pour faire le lien avec la suite : 
+
+Diapo 2 : Fiche spécimen, la carte est là pour exemple
+ 
+Filiation : comme dab
+Nom de la plante : comme dab
+Localisation du spécimen (symbole vert = vivant / rouge = mort). 
+N° du Spécimen : CC2257
+Date de plantation : 1998-08-09 par (menu déroulant) avec le nom + prénom du type
+Origine du matériel : naturelle, cf. word.
+Indigénat : ex = exotique, cf. word. 
+Raison de la disparition : cf. word (ici 0 car la plante est vivante)
+Herbarium mediterraneae : le « + » pour accéder au formulaire de la diapo suivante. Le crayon pour la modifier. 
+Remarques : champs texte classique qui s’agrandis en fonction du texte que l’ont y met. 
+Médias : a voir avec le média du début. L’utilisateur doit pouvoir passer d’une photo a l’autre quand une est séléctionnée, x 10 max. Lien vers le serveur pour avoir toutes les images si besoin, cf. https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:30043364-2 (bon exemple sur ce lien). 
+
+Diapo 3: 
+Formulaire pour rentrer les données d’étiquettes d’herbier
+
+Les codes couleurs sont ceux de la charte colorimétrique du Domaine. 
+J’imagine pour ce formulaire,  un système automatique qui permettrait de créer la bande colorées à droite de l’étiquette. Le but étant évidement de savoir exactement en un coup d’œil à quelle parcelle appartient le spécimen. 
+
+Les données de l’étiquette seront a montrer à la main en attendant d’avoir un système automatique, notamment pour la localisation (Locus). 
+
+Le but ultime à terme, est de pouvoir exporter puis imprimer toutes les étiquettes une fois quelles serons remplies et de les associer aux parts d’herbiers. 
+
+Le symbole vert en haut à droite indique que le formulaire est totalement remplie et que l’étiquette est imprimable. Si c’est pas le cas peut être mettre la croix que j’ 
+
+Diapo 4 : 
+
+Cette page apparait si les spécimens ont déjà été renseignés et devrait alors être à la diapo 2 (ici 4 pour plus de clarté dans la succession des pages). 
+
+Elle permet de choisir le spécimen à renseigner. 
+
+La carte est juste pour donner une idée de la suite (ou prévoir). A terme On devra pouvoir localiser le spécimen sur la carte en cliquant sur la zone classiquement. Les données de localisation dans le tableau à droite en seront la conséquence lisible. Quand on passe sur la ligne du tableau, l’emplacement sur la carte s’anime avec la couleur verte ou rouge (vivant ou mort). 
+
+Attention j’aimerais bien que tous les espèces d’un genre apparaissent. Ex tous les Erythrina en collection comme sur l’exemple dans le tableau (ici 2 pour l’exemple dont un qui n’a pas d’herbier car « - » dans n° de récolte.
+
+A voir sur ce qui est cliquable pour envoyer à la page spécimen a consulter. La ligne entière + le point sur la carte m’apparait pas mal. A voir selon les possibilités. 
+
+
+
+
+
