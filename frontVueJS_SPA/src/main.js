@@ -28,6 +28,6 @@ app.mixin(markedMixin)
 
 app.use(router)
 
-app.config.globalProperties.$url_prefix = "http://127.0.0.1:5000"
+app.config.globalProperties.$url_prefix = ""
 
 app.mount('#app')
