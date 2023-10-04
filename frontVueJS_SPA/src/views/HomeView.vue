@@ -69,10 +69,10 @@ export default {
       <div style="padding-top: 15%;">
         <div class="columns">
           <div class="column is-half is-offset-one-quarter">
-            <a href="/contact">
-              <h1 class="title is-1 jasmine">Hortus Mediterraneae</h1>
-              <h2 class="subtitle is-4 jasmine">Le référentiel du Domaine du Rayol</h2>
-            </a>
+              <RouterLink to="/contact">
+                <h1 class="title is-1 jasmine">Hortus Mediterraneae</h1>
+                <h2 class="subtitle is-4 jasmine">Le référentiel du Domaine du Rayol</h2>
+              </RouterLink>
           </div>
         </div>
         <div class="columns">
