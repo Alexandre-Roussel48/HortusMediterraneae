@@ -1,0 +1,1 @@
+import{_ as e,r as n,o as s,d as a,w as r,e as c,t as i}from"./index-aa26a53f.js";const _={name:"clink",props:["link","nom"]};function p(k,l,o,m,d,f){const t=n("RouterLink");return s(),a(t,{to:o.link},{default:r(()=>[c(i(o.nom),1)]),_:1},8,["to"])}const x=e(_,[["render",p]]);export{x as C};

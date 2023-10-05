@@ -30,11 +30,7 @@ export default {
       await fetch(`${this.$url_prefix}/pedagogie/delete?q=${this.data.id}`)
       .then(resp => {
         if (resp = 'deleted') {
-          var link = document.createElement("a");
-          link.href = '/pedagogie/search';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+          this.$router.push('/pedagogie/search');
         }
       });
     }
@@ -105,9 +101,11 @@ export default {
           <div class="column is-4">
             <div class="field has-addons">
               <p class="control">
-                <a :href="'/pedagogie/create?q='+data.id" class="button"><span class="icon">
-                  <font-awesome-icon :icon="['fas', 'pen']" />
-                </span></a>
+                <RouterLink :to="'/pedagogie/create?q='+data.id" class="button">
+                  <span class="icon">
+                    <font-awesome-icon :icon="['fas', 'pen']" />
+                  </span>
+                </RouterLink>
               </p>
               <p class="control">
                 <a @click="delete_anim()" class="button"><span class="icon">

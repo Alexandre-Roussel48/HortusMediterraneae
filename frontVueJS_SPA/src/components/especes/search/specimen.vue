@@ -23,11 +23,7 @@ export default {
 			await fetch(`${this.$url_prefix}/especes/specimen/delete?q=${this.specimen.id}`)
 			.then(resp => {
 				if (resp = 'deleted') {
-					var link = document.createElement("a");
-					link.href = `/especes/${this.specimen.taxonomie.id}`;
-					document.body.appendChild(link);
-					link.click();
-					document.body.removeChild(link);
+					this.$router.push(`/especes/${this.specimen.taxonomie.id}`);
 				}
 			});
 		}
@@ -54,9 +50,9 @@ export default {
 				<button class="button ghost_button">{{specimen.parcelle.label}}</button>
 				<div class="field has-addons">
 					<p class="control">
-						<a :href="'/especes/'+specimen.taxonomie.id+'/create?q='+specimen.id" class="button"><span class="icon">
+						<RouterLink :to="'/especes/'+specimen.taxonomie.id+'/create?q='+specimen.id" class="button"><span class="icon">
 							<font-awesome-icon :icon="['fas', 'pen']" />
-						</span></a>
+						</span></RouterLink>
 					</p>
 					<p class="control">
 						<a @click="delete_specimen()" class="button"><span class="icon">

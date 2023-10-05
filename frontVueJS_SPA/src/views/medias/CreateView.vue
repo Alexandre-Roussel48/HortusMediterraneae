@@ -204,7 +204,7 @@ export default {
 			</div>
 		</div>
 		<div v-else class="container form_position">
-			<h1 class="title">Vous pouvez rechercher <a :href="redirect">votre média</a> !</h1>
+			<h1 class="title">Vous pouvez rechercher <RouterLink :to="redirect">votre média</RouterLink> !</h1>
 		</div>
 	</div>
 </template>

@@ -1,7 +1,10 @@
 <script>
 
+import CLink from '@/components/especes/search/clink.vue'
+
 export default {
 	name: 'taxons',
+	components: {CLink},
 	props: ['key', 'query', 'rangs'],
 	data () {
 		return {
@@ -25,13 +28,13 @@ export default {
 			return await response.json();
 		},
 		get_parents (taxon) {
-			let parents = '';
+			let parents = [];
 			let current = taxon;
 			while (current.parent.parent != '') {
-				parents = ` > <a href="/especes/${current.parent.id}">` + current.parent.nom + `</a>` + parents;
+				parents.push([`/especes/${current.parent.id}`,current.parent.nom])
 				current = current.parent;
 			}
-			parents = `<a href="/especes/${current.parent.id}">` + current.parent.nom + `</a>` + parents;
+			parents.push([`/especes/${current.parent.id}`,current.parent.nom])
 			return parents;
 		},
 		cut_description (description) {
@@ -83,15 +86,15 @@ export default {
 			<div class="box text_break" v-for="taxon in this.taxons">
 				<div class="columns is-vcentered is-gapless is-multiline">
 					<div class="column is-9">
-						<a :href="'/especes/'+taxon.id"><i>{{taxon.nom}}</i> {{taxon.auteur}}, {{taxon.annee}}</a>
+						<RouterLink :to="'/especes/'+taxon.id"><i>{{taxon.nom}}</i> {{taxon.auteur}}, {{taxon.annee}}</RouterLink>
 					</div>
 					<div class="column is-3">
 						<button class="button ghost_button">{{taxon.rang.label}}</button>
 						<div class="field has-addons">
 							<p class="control">
-								<a :href="'/especes/create?q='+taxon.id" class="button"><span class="icon">
+								<RouterLink :to="'/especes/create?q='+taxon.id" class="button"><span class="icon">
 									<font-awesome-icon :icon="['fas', 'pen']" />
-								</span></a>
+								</span></RouterLink>
 							</p>
 							<p class="control">
 								<a @click="delete_taxon(taxon)" class="button"><span class="icon">
@@ -103,7 +106,10 @@ export default {
 					<div class="column is-12">
 						<span v-if="taxon.parent">
 							<small>Classification : </small>
-							<small v-html="get_parents(taxon)"></small>
+							<small v-for="item, idx in get_parents(taxon).reverse()">
+								<span v-if="get_parents(taxon).length > 1 && idx > 0"> &lt; </span>
+								<CLink :link="item[0]" :nom="item[1]"/>
+							</small>
 						</span>
 					</div>
 					<div class="column is-12">

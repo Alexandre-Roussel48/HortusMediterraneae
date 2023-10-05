@@ -230,7 +230,7 @@ export default {
       </div>
     </div>
     <div v-else class="container form_position">
-      <h1 class="title">Vous pouvez consulter <a :href="redirect">votre animation</a> !</h1>
+      <h1 class="title">Vous pouvez consulter <RouterLink :to="redirect">votre animation</RouterLink> !</h1>
     </div>
   </div>
 </template>

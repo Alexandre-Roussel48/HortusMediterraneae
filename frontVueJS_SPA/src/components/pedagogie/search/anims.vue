@@ -80,15 +80,15 @@ export default {
 												<span class="tooltiptext">Validée</span>
 											</div>
 										</span>
-										<a :href="'/pedagogie/create?q='+anim.id" class="button">
+										<RouterLink :to="'/pedagogie/create?q='+anim.id" class="button">
 											<div class="tooltip">
 												<span class="icon">
 													<font-awesome-icon :icon="['fas', 'pen']" />
 												</span>
 												<span class="tooltiptext">Éditer l'animation</span>
 											</div>
-										</a>
-										<a :href="'/pedagogie/'+anim.id" class="button">Consulter</a>
+										</RouterLink>
+										<RouterLink :to="'/pedagogie/'+anim.id" class="button">Consulter</RouterLink>
 									</div>
 								</div>
 								<div class="column is-4">

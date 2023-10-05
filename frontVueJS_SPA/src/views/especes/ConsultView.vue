@@ -1,10 +1,11 @@
 <script>
 
 import Specimen from '@/components/especes/search/specimen.vue'
+import CLink from '@/components/especes/search/clink.vue'
 
 export default {
 	name: 'especes_consult',
-	components: {Specimen},
+	components: {Specimen, CLink},
 	data () {
 		return {
 			data: {},
@@ -64,13 +65,13 @@ export default {
 			}
 		},
 		get_parents () {
-			let parents = '';
+			let parents = [];
 			let current = this.data;
 			while (current.parent.parent != '') {
-				parents = ` > <a href="/especes/${current.parent.id}">` + current.parent.nom + `</a>` + parents;
+				parents.push([`/especes/${current.parent.id}`,current.parent.nom])
 				current = current.parent;
 			}
-			parents = `<a href="/especes/${current.parent.id}">` + current.parent.nom + `</a>` + parents;
+			parents.push([`/especes/${current.parent.id}`,current.parent.nom])
 			return parents;
 		},
 		set_tags () {
@@ -90,11 +91,7 @@ export default {
 			await fetch(`${this.$url_prefix}/especes/delete?q=${this.data.id}`)
 			.then(resp => {
 				if (resp = 'deleted') {
-					var link = document.createElement("a");
-					link.href = '/especes/search';
-					document.body.appendChild(link);
-					link.click();
-					document.body.removeChild(link);
+					this.$router.push('/especes/search');
 				}
 			});
 		}
@@ -129,7 +126,10 @@ export default {
 									<p>
 										<span v-if="data.parent">
 											<small>Classification : </small>
-											<small v-html="get_parents()"></small>
+											<small v-for="item, idx in get_parents().reverse()">
+												<span v-if="get_parents().length > 1 && idx > 0"> &lt; </span>
+												<CLink :link="item[0]" :nom="item[1]"/>
+											</small>
 										</span>
 									</p>
 									<p>
@@ -143,14 +143,18 @@ export default {
 									<button class="button ghost_button">{{data.rang.label}}</button>
 									<div class="field has-addons">
 										<p class="control">
-											<a :href="'/especes/create?q='+data.id" class="button"><span class="icon">
-												<font-awesome-icon :icon="['fas', 'pen']" />
-											</span></a>
+											<RouterLink :to="'/especes/create?q='+data.id" class="button">
+												<span class="icon">
+													<font-awesome-icon :icon="['fas', 'pen']" />
+												</span>
+											</RouterLink>
 										</p>
 										<p class="control">
-											<a @click="delete_taxon()" class="button"><span class="icon">
-												<font-awesome-icon :icon="['fas', 'trash']" />
-											</span></a>
+											<a @click="delete_taxon()" class="button">
+												<span class="icon">
+													<font-awesome-icon :icon="['fas', 'trash']" />
+												</span>
+											</a>
 										</p>
 									</div>
 								</div>
@@ -223,13 +227,13 @@ export default {
 									<p class="subtitle is-6" v-if="tags.type_bio.length!=0">
 										<b>&nbsp;Type biologique : </b>
 										<span v-for="tag in data.tags">
-											<span v-if="tag.reference=='ref.type_bio'">{{tag.label}} </span>
+											<span v-if="tag.reference=='ref.type_bio'">{{tag.label}}, </span>
 										</span>
 									</p>
 									<p class="subtitle is-6" v-if="tags.couleur_fleur.length!=0">
 										<b>&nbsp;Couleur des fleurs : </b>
 										<span v-for="tag in data.tags">
-											<span v-if="tag.reference=='ref.couleur_fleur'">{{tag.label}} </span>
+											<span v-if="tag.reference=='ref.couleur_fleur'">{{tag.label}}, </span>
 										</span>
 									</p>
 								</div>
@@ -238,7 +242,7 @@ export default {
 						<div class="column is-5">
 							<div class="columns is-multiline">
 								<div class="column is-12 text_center">
-									<a :href="'/especes/'+data.id+'/create'" class="button">Insérer un specimen</a>
+									<RouterLink :to="'/especes/'+data.id+'/create'" class="button">Insérer un specimen</RouterLink>
 								</div>
 								<div class="column is-12" style="height: 500px;" v-if="specimens.length!=0">
 									<div class="box" >

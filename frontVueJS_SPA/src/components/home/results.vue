@@ -163,9 +163,9 @@ export default {
 									</span></a>
 								</p>
 								<p class="control">
-									<a :href="'/medias/create?q='+media.id" class="button"><span class="icon">
+									<RouterLink :to="'/medias/create?q='+media.id" class="button"><span class="icon">
 										<font-awesome-icon :icon="['fas', 'pen']" />
-									</span></a>
+									</span></RouterLink>
 								</p>
 							</div>
 						</div>
@@ -185,7 +185,7 @@ export default {
 							</span>
 						</div>
 						<div class="column is-3">
-							<a :href="'/especes/'+taxon.id"><i>{{taxon.nom}}</i> {{taxon.auteur}}, {{taxon.annee}}</a>
+							<RouterLink :to="'/especes/'+taxon.id"><i>{{taxon.nom}}</i> {{taxon.auteur}}, {{taxon.annee}}</RouterLink>
 						</div>
 						<div class="column is-4">
 							<div v-html="md(this.cut_text(taxon.description))"></div>
@@ -194,14 +194,14 @@ export default {
 							<button class="button ghost_button">{{taxon.rang.label}}</button>
 						</div>
 						<div class="column is-2">
-							<a :href="'/especes/create?q='+taxon.id" class="button">
+							<RouterLink :to="'/especes/create?q='+taxon.id" class="button">
 								<div class="tooltip">
 									<span class="icon">
 										<font-awesome-icon :icon="['fas', 'pen']" />
 									</span>
 									<span class="tooltiptext">Éditer le taxon</span>
 								</div>
-							</a>
+							</RouterLink>
 						</div>
 					</div>
 				</div>
@@ -219,7 +219,7 @@ export default {
 							</span>
 						</div>
 						<div class="column is-3">
-							<a :href="'/especes/'+specimen.taxonomie.id"><i>{{specimen.taxonomie.nom}}</i> {{specimen.taxonomie.auteur}}, {{specimen.taxonomie.annee}}</a>
+							<RouterLink :to="'/especes/'+specimen.taxonomie.id"><i>{{specimen.taxonomie.nom}}</i> {{specimen.taxonomie.auteur}}, {{specimen.taxonomie.annee}}</RouterLink>
 						</div>
 						<div class="column is-4">
 							{{specimen.herbier}}
@@ -228,14 +228,14 @@ export default {
 							<button class="button ghost_button">{{specimen.parcelle.label}}</button>
 						</div>
 						<div class="column is-2">
-							<a :href="'/especes/'+specimen.taxonomie.id+'/create?q='+specimen.id" class="button">
+							<RouterLink :to="'/especes/'+specimen.taxonomie.id+'/create?q='+specimen.id" class="button">
 								<div class="tooltip">
 									<span class="icon">
 										<font-awesome-icon :icon="['fas', 'pen']" />
 									</span>
 									<span class="tooltiptext">Éditer le specimen</span>
 								</div>
-							</a>
+							</RouterLink>
 						</div>
 					</div>
 				</div>
@@ -253,7 +253,7 @@ export default {
 							</span>
 						</div>
 						<div class="column is-3">
-							<a :href="'/pedagogie/'+anim.id">{{anim.titre}}</a>
+							<RouterLink :to="'/pedagogie/'+anim.id">{{anim.titre}}</RouterLink>
 						</div>
 						<div class="column is-4">
 							<div v-html="md(this.cut_text(anim.objectifs))"></div>
@@ -262,14 +262,14 @@ export default {
 							{{anim._min}}/{{anim._max}} pers.
 						</div>
 						<div class="column is-2">
-							<a :href="'/pedagogie/create?q='+anim.id" class="button">
+							<RouterLink :to="'/pedagogie/create?q='+anim.id" class="button">
 								<div class="tooltip">
 									<span class="icon">
 										<font-awesome-icon :icon="['fas', 'pen']" />
 									</span>
 									<span class="tooltiptext">Éditer l'animation</span>
 								</div>
-							</a>
+							</RouterLink>
 						</div>
 					</div>
 				</div>

@@ -76,7 +76,7 @@ export default {
 			<div class="box text_break" v-for="specimen in this.specimens">
 				<div class="columns is-vcentered is-gapless is-multiline">
 					<div class="column is-9">
-						<a :href="'/especes/'+specimen.taxonomie.id"><i>{{specimen.taxonomie.nom}}</i> {{specimen.taxonomie.auteur}}, {{specimen.taxonomie.annee}}</a>
+						<RouterLink :to="'/especes/'+specimen.taxonomie.id"><i>{{specimen.taxonomie.nom}}</i> {{specimen.taxonomie.auteur}}, {{specimen.taxonomie.annee}}</RouterLink>
 						<p>
 							<small v-if="specimen.herbier">Part d'herbier : {{specimen.herbier}}&nbsp;&nbsp;&nbsp;&nbsp;</small>
 							<small>Indigénat : {{specimen.indigenat.label}}</small>
@@ -86,9 +86,9 @@ export default {
 						<button class="button ghost_button">{{specimen.parcelle.label}}</button>
 						<div class="field has-addons">
 							<p class="control">
-								<a :href="'/especes/'+specimen.taxonomie.id+'/create?q='+specimen.id" class="button"><span class="icon">
+								<RouterLink :to="'/especes/'+specimen.taxonomie.id+'/create?q='+specimen.id" class="button"><span class="icon">
 									<font-awesome-icon :icon="['fas', 'pen']" />
-								</span></a>
+								</span></RouterLink>
 							</p>
 							<p class="control">
 								<a @click="delete_specimen(specimen)" class="button"><span class="icon">

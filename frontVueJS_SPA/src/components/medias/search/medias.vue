@@ -148,9 +148,9 @@ export default {
 									  	</span></a>
 									  </p>
 									  <p class="control">
-									  	<a :href="'/medias/create?q='+media.id" class="button"><span class="icon">
+									  	<RouterLink :to="'/medias/create?q='+media.id" class="button"><span class="icon">
 									  		<font-awesome-icon :icon="['fas', 'pen']" />
-									  	</span></a>
+									  	</span></RouterLink>
 									  </p>
 									  <p class="control">
 									  	<a @click="delete_media(media)" class="button"><span class="icon">
