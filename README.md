@@ -2,8 +2,6 @@
 
 Plateforme de sessions pédagogiques et outil botanique
 
-## PASSER LE REPO EN PUBLIC
-
 ## install
 
 precond :
@@ -24,10 +22,10 @@ pip install -r requirements.txt
 
 ## configuration
 
-Rename file **config.py.sample** -> **config.py and complete informations** 
+Rename file **config.py.sample** -> **config.py and complete informations**
+Rename file **database/docker-compose.yml.sample** -> **database/docker-compose.yml and complete informations**
 
-You can add or remove tags **carefully** in **models/__init__.py** and add or remove the linked images in **static/ressources**
-Replace the **static/ressources/favicon.png** for personalization.
+You can add or remove tags **carefully** in **models/__init__.py**.
 
 First time :
 
@@ -54,7 +52,11 @@ python
 
 ```
 	rundev.sh
-. venv/bin/activate
+cd database
+docker-compose up --build &&
+cd ..
+
+source venv/bin/activate
 export FLASK_ENV=development
 export FLASK_APP=server.py
 flask run
@@ -64,6 +66,10 @@ flask run
 
 ```
 	run.sh
+cd database
+docker-compose up --build &&
+cd ..
+
 kill $(cat HortusMediterraneae.pid)
 source venv/bin/activate
 gunicorn --daemon -b '0.0.0.0:4800' --pid=HortusMediterraneae.pid --error-log=./errors.log server:app
