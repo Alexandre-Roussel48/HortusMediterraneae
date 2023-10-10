@@ -58,6 +58,9 @@ export default {
     this.medias = this.rep['medias'];
     this.animations = this.rep['animations'];
     this.data_ready = true;
+    if (document.path) {
+      this.$router.push(document.path)
+    }
   }
 }
 
