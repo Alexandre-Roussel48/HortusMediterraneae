@@ -5,10 +5,10 @@
 	<div style="padding-top: 15%;">
 		<div class="columns">
 			<div class="column is-half is-offset-one-quarter">
-				<RouterLink to="/">
+				<a href="/">
 					<h1 class="title is-1 jasmine">Hortus Mediterraneae</h1>
 					<h2 class="subtitle is-4 jasmine">Le référentiel du Domaine du Rayol</h2>
-				</RouterLink>
+				</a>
 			</div>
 		</div>
 	</div>
