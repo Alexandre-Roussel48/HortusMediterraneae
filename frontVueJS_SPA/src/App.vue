@@ -15,7 +15,7 @@ import { RouterLink, RouterView } from 'vue-router'
           <div class="columns is-gapless centered_columns">
             <div class="column is-2"></div>
             <div class="column is-2">
-              <RouterLink to="/" class="title is-5 crapeau">Accueil</RouterLink>
+              <a href="/" class="title is-5 crapeau">Accueil</a>
             </div>
             <div class="column is-2">
               <RouterLink to="/especes" class="title is-5 crapeau">Espèces</RouterLink>
