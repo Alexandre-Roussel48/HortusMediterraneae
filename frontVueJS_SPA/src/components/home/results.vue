@@ -14,19 +14,19 @@ export default {
 	},
 	methods: {
 		async get_medias () {
-			let response = await fetch(`${this.$url_prefix}/medias/search?q=${this.query}`);
+			let response = await fetch(`${this.$url_prefix}/medias/searchs?q=${this.query}`);
 			return await response.json();
 		},
 		async get_taxons () {
-			let response = await fetch(`${this.$url_prefix}/especes/search?q=${this.query}`);
+			let response = await fetch(`${this.$url_prefix}/especes/searchs?q=${this.query}`);
 			return await response.json();
 		},
 		async get_specimens () {
-			let response = await fetch(`${this.$url_prefix}/especes/specimen/search?q=${this.query}`);
+			let response = await fetch(`${this.$url_prefix}/especes/specimen/searchs?q=${this.query}`);
 			return await response.json();
 		},
 		async get_animations () {
-			let response = await fetch(`${this.$url_prefix}/pedagogie/search?q=${this.query}`);
+			let response = await fetch(`${this.$url_prefix}/pedagogie/searchs?q=${this.query}`);
 			return await response.json();
 		},
 		toggle_media (media) {
