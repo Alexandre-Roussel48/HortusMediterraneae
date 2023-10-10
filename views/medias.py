@@ -130,7 +130,7 @@ def medias_delete():
 
 
 #Cette fonction permet de chercher les medias par noms.
-@views.route('/search', methods=['GET'])
+@views.route('/searchs', methods=['GET'])
 #@auth.require_valid_user
 def search_media():
      query = request.args['q']

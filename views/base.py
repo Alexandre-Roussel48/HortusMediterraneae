@@ -25,7 +25,7 @@ views = Blueprint('main', __name__)
 #Cette fonction est le point de depart de l'application.
 @views.route('/')
 def index():
-	return render_template('index.html')
+	return render_template('index.html',path={'path':''})
 
 #Cette fonction permet de récupérer toutes les statistiques.
 @views.route('/get_stats')

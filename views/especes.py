@@ -145,7 +145,7 @@ def get_specimens():
 
 
 #Cette fonction permet de chercher les taxons par nom.
-@views.route('/search', methods=['GET'])
+@views.route('/searchs', methods=['GET'])
 #@auth.require_valid_user
 def search_taxonomie():
      query = request.args['q']
@@ -154,7 +154,7 @@ def search_taxonomie():
 
 
 #Cette fonction permet de chercher les specimens par parcelles.
-@views.route('/specimen/search', methods=['GET'])
+@views.route('/specimen/searchs', methods=['GET'])
 #@auth.require_valid_user
 def search_specimen():
      query = request.args['q']

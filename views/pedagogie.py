@@ -113,7 +113,7 @@ def anim_delete():
 
 
 #Cette fonction permet de chercher les specimens par parcelles.
-@views.route('/search', methods=['GET'])
+@views.route('/searchs', methods=['GET'])
 #@auth.require_valid_user
 def search_animation():
      query = request.args['q']
